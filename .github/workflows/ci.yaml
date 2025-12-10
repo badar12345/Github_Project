@@ -20,7 +20,11 @@ jobs:
       run: pip install -r requirement.txt
 
     - name: Run tests
-      run: pytest
+      run: |
+          # Set PYTHONPATH to include the current directory (repo root)
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          # Now run pytest, which can find the 'app' module
+          pytest
 
     - name: Upload result log
       uses: actions/upload-artifact@v4
